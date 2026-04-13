@@ -1,0 +1,14 @@
+{
+  "name": "sync-engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "chokidar": "^4.0.3",
+    "dotenv": "^16.4.7"
+  }
+}
