@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ArchitectOS | Project Viewer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#081425",
+                        "outline": "#908fa0",
+                        "on-background": "#d8e3fb",
+                        "on-primary-fixed": "#07006c",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-container-highest": "#2a3548",
+                        "on-tertiary-fixed-variant": "#5a4300",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#1f2a3c",
+                        "primary-fixed": "#e1e0ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-tertiary-fixed": "#251a00",
+                        "on-tertiary-container": "#372700",
+                        "secondary-container": "#00b954",
+                        "on-primary": "#1000a9",
+                        "on-surface": "#d8e3fb",
+                        "tertiary-fixed": "#ffdf9a",
+                        "secondary-fixed": "#6bff8f",
+                        "surface": "#081425",
+                        "secondary-fixed-dim": "#4ae176",
+                        "primary": "#c0c1ff",
+                        "tertiary": "#f7be1d",
+                        "surface-container": "#152031",
+                        "surface-bright": "#2f3a4c",
+                        "on-surface-variant": "#c7c4d7",
+                        "inverse-surface": "#d8e3fb",
+                        "surface-tint": "#c0c1ff",
+                        "outline-variant": "#464554",
+                        "primary-container": "#8083ff",
+                        "surface-container-low": "#111c2d",
+                        "tertiary-fixed-dim": "#f7be1d",
+                        "inverse-on-surface": "#263143",
+                        "inverse-primary": "#494bd6",
+                        "on-primary-container": "#0d0096",
+                        "surface-container-lowest": "#040e1f",
+                        "on-tertiary": "#3f2e00",
+                        "surface-variant": "#2a3548",
+                        "secondary": "#4ae176",
+                        "tertiary-container": "#b68a00",
+                        "on-secondary": "#003915",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#004119",
+                        "surface-dim": "#081425",
+                        "on-secondary-fixed-variant": "#005321",
+                        "on-secondary-fixed": "#002109"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #081425;
+            color: #d8e3fb;
+        }
+        .glass-panel {
+            background: rgba(42, 53, 72, 0.4);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(192, 193, 255, 0.1);
+        }
+        .code-syntax-keyword { color: #c0c1ff; }
+        .code-syntax-string { color: #4ae176; }
+        .code-syntax-comment { color: #908fa0; font-style: italic; }
+        .code-syntax-function { color: #f7be1d; }
+    </style>
+</head>
+<body class="overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-[#081425]/60 backdrop-blur-[24px] text-[#c0c1ff] font-['Inter'] antialiased tracking-[-0.02em] docked full-width top-0 z-50 border-t border-white/10 shadow-[0_20px_40px_rgba(8,20,37,0.4)] flex justify-between items-center w-full px-8 h-20">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] bg-clip-text text-transparent">ArchitectOS</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#c0c1ff] border-b-2 border-[#c0c1ff] pb-1 hover:text-white transition-colors duration-200 active:scale-95 transition-transform" href="#">Overview</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors duration-200 active:scale-95 transition-transform" href="#">Add Project</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors duration-200 active:scale-95 transition-transform" href="#">Profile</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors duration-200 active:scale-95 transition-transform" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-slate-400 hover:text-white transition-colors">notifications</button>
+<button class="material-symbols-outlined p-2 text-slate-400 hover:text-white transition-colors">history</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-[#c0c1ff]/20">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional software engineer with neutral expression and clean modern lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmPty7bkj5A1ocF3PilF_RGd-HXMGR21iprDIK3NR0LHzSf2cYhjskPFIP4OIoLCd8K4EaEpi0tplPxrF-WO05FW1EXt2s8DbS4ImKvfZXLsBMECAlwQtJ5bzzJy8V7Pttzg6i7ZHNMoDmP4yEtNJ2nOPGjp6-A2Rg_9pa4Uim96-VSVSzjy0x2WzOXkDra3BNgf9OO19Wim4ZrG0Cl84hlo58mvdphKSg3-bo1IK0Mhpzy4D3IwX72lkYt382oz6apBAfUAL-2_M"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar / File Tree Panel -->
+<aside class="w-72 bg-[#111c2d] flex flex-col border-r border-white/5">
+<div class="p-6 border-b border-white/5">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold tracking-widest text-[#c0c1ff] uppercase">EXPLORER</span>
+<span class="material-symbols-outlined text-sm text-slate-500 cursor-pointer hover:text-white">create_new_folder</span>
+</div>
+<h2 class="text-lg font-bold text-on-surface">quantum-engine-v2</h2>
+</div>
+<nav class="flex-1 overflow-y-auto py-4">
+<!-- File Tree Nodes -->
+<div class="space-y-1">
+<div class="flex items-center gap-2 px-6 py-1.5 text-slate-400 hover:bg-[#1f2a3c] transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+<span class="material-symbols-outlined text-secondary text-base">folder_open</span>
+<span class="text-sm font-medium">src</span>
+</div>
+<div class="pl-12 space-y-1">
+<div class="flex items-center gap-2 px-6 py-1.5 text-slate-400 hover:bg-[#1f2a3c] transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">keyboard_arrow_right</span>
+<span class="material-symbols-outlined text-primary text-base">folder</span>
+<span class="text-sm font-medium">components</span>
+</div>
+<div class="flex items-center gap-2 px-6 py-1.5 bg-[#c0c1ff]/10 text-[#c0c1ff] border-r-4 border-[#c0c1ff] transition-all cursor-pointer">
+<span class="material-symbols-outlined text-base">javascript</span>
+<span class="text-sm font-medium">App.tsx</span>
+</div>
+<div class="flex items-center gap-2 px-6 py-1.5 text-slate-400 hover:bg-[#1f2a3c] transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-base">css</span>
+<span class="text-sm font-medium">global.css</span>
+</div>
+</div>
+<div class="flex items-center gap-2 px-6 py-1.5 text-slate-400 hover:bg-[#1f2a3c] transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">keyboard_arrow_right</span>
+<span class="material-symbols-outlined text-primary text-base">folder</span>
+<span class="text-sm font-medium">public</span>
+</div>
+<div class="flex items-center gap-2 px-6 py-1.5 text-slate-400 hover:bg-[#1f2a3c] transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-base">description</span>
+<span class="text-sm font-medium">package.json</span>
+</div>
+<div class="flex items-center gap-2 px-6 py-1.5 text-slate-400 hover:bg-[#1f2a3c] transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-base">settings</span>
+<span class="text-sm font-medium">tsconfig.json</span>
+</div>
+</div>
+</nav>
+<div class="p-6">
+<button class="w-full py-4 bg-gradient-to-r from-[#c0c1ff] to-[#8083ff] text-[#1000a9] rounded-xl font-bold text-sm tracking-wide uppercase active:scale-95 transition-transform">
+                    Deploy New
+                </button>
+</div>
+</aside>
+<!-- Main Panel -->
+<main class="flex-1 flex flex-col bg-surface">
+<!-- Project Header Bar -->
+<div class="h-20 flex items-center justify-between px-8 border-b border-white/5 bg-[#081425]">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<h1 class="text-xl font-black text-on-surface tracking-tight">quantum-engine-v2</h1>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-[11px] font-bold text-slate-500 tracking-wider uppercase">Last synced: 2 mins ago</span>
+</div>
+</div>
+<div class="h-8 w-px bg-white/5"></div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-[10px] font-bold text-secondary-fixed border border-secondary/20 uppercase tracking-widest">Main Branch</span>
+<span class="text-xs text-slate-500">v2.4.0-alpha</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-high text-on-surface rounded-xl text-sm font-semibold hover:bg-surface-bright transition-colors border border-white/5">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Download ZIP
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-xl text-sm font-bold hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-lg">rocket_launch</span>
+                        Push Changes
+                    </button>
+</div>
+</div>
+<!-- Code Editor Preview Area -->
+<div class="flex-1 p-8 overflow-hidden bg-surface-container-lowest">
+<div class="h-full w-full rounded-xl bg-surface-container-low border border-white/5 flex flex-col shadow-2xl">
+<!-- Editor Tabs -->
+<div class="flex items-center h-12 bg-surface-container-high px-2 rounded-t-xl">
+<div class="flex items-center gap-2 px-4 h-full bg-surface-container-low border-t-2 border-[#c0c1ff] text-on-surface text-sm font-medium">
+<span class="material-symbols-outlined text-base text-primary">javascript</span>
+                            App.tsx
+                            <span class="material-symbols-outlined text-xs text-slate-500 hover:text-white cursor-pointer ml-2">close</span>
+</div>
+<div class="flex items-center gap-2 px-4 h-full text-slate-500 text-sm font-medium hover:bg-white/5 cursor-pointer">
+<span class="material-symbols-outlined text-base">css</span>
+                            global.css
+                            <span class="material-symbols-outlined text-xs opacity-0 hover:opacity-100 cursor-pointer ml-2">close</span>
+</div>
+</div>
+<!-- Editor Content -->
+<div class="flex-1 overflow-auto p-6 font-mono text-sm leading-relaxed relative">
+<!-- Content Grid for Line Numbers and Code -->
+<div class="grid grid-cols-[3rem_1fr] gap-6">
+<div class="text-right text-slate-600 select-none space-y-1 opacity-50">
+<div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div>
+</div>
+<div class="text-slate-300 space-y-1">
+<div><span class="code-syntax-keyword">import</span> React <span class="code-syntax-keyword">from</span> <span class="code-syntax-string">'react'</span>;</div>
+<div><span class="code-syntax-keyword">import</span> { ArchitectUI } <span class="code-syntax-keyword">from</span> <span class="code-syntax-string">'@architect/core'</span>;</div>
+<div> </div>
+<div><span class="code-syntax-comment">// Initialize the Quantum Engine</span></div>
+<div><span class="code-syntax-keyword">const</span> <span class="code-syntax-function">QuantumEngine</span> = () =&gt; {</div>
+<div class="pl-4"><span class="code-syntax-keyword">const</span> [state, setState] = React.<span class="code-syntax-function">useState</span>({ active: <span class="code-syntax-keyword">true</span> });</div>
+<div class="pl-4"> </div>
+<div class="pl-4"><span class="code-syntax-keyword">return</span> (</div>
+<div class="pl-8">&lt;<span class="code-syntax-function">ArchitectUI</span>.Container&gt;</div>
+<div class="pl-12">&lt;<span class="code-syntax-function">ArchitectUI</span>.Header title=<span class="code-syntax-string">"Project Alpha"</span> /&gt;</div>
+<div class="pl-12">&lt;<span class="code-syntax-function">ArchitectUI</span>.Canvas&gt;</div>
+<div class="pl-16"><span class="code-syntax-comment">{/* Render dynamic architectural nodes */}</span></div>
+<div class="pl-16">{nodes.<span class="code-syntax-function">map</span>(node =&gt; (</div>
+<div class="pl-20">&lt;<span class="code-syntax-function">Node</span> key={node.id} data={node} /&gt;</div>
+<div class="pl-16">))}</div>
+<div class="pl-12">&lt;/<span class="code-syntax-function">ArchitectUI</span>.Canvas&gt;</div>
+<div class="pl-8">&lt;/<span class="code-syntax-function">ArchitectUI</span>.Container&gt;</div>
+<div class="pl-4">);</div>
+<div>};</div>
+</div>
+</div>
+<!-- Floating Glass Action -->
+<div class="absolute bottom-8 right-8 glass-panel p-4 rounded-2xl border border-white/10 flex items-center gap-6 shadow-2xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Compiler Status</span>
+<span class="text-xs font-bold text-on-surface">Ready to Deploy</span>
+</div>
+</div>
+<div class="h-8 w-px bg-white/10"></div>
+<div class="flex -space-x-2">
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-surface" data-alt="Portrait of a male developer in his 30s with professional indoor studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABOpK-i3SvSMY-hyqvY4CLeqcPYr6TLCDtMwkitP91mFjv_Z383JzNVFPiHcziJtbfV0ER2TkZhiXRIdxFKZSnLuV3eBaD6jVLtf6YVbwuiFskxVZtg0BszrTLeiEUR_alja_r73LQ8n_4BFRDHh-ZsHYHoX0NYMGFFYInGarm6jUiS6Uahtr9cdWnlFAB_mg7zBpv0IPrt9cZJk_AAdAwD38IhCNuryNf7gJTsnsXMPJr_IClNhB8IieUcoIZJDqxkr3MyiWsFb0"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-surface" data-alt="Close-up of a smiling young professional woman with natural soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_gdIDEp4r93z5jf724_uqdoyazTzw5e5QuDkQ24wVIHcTLXlcTNO46_0Zs_1abirx-z0kdKix431i1TJSVZjNeOQ4MGD5PLv8Rz1yIUgBQSfvx95okQiR10bVwlA7OQUokXq7JyrSVYFLqostrTzaANhQMHf50vPGTSsX3-OIrrrZrXo727JKFx8umUqAQAX_P7MnTN3Vca1pLVFY4VqD3tZz1naMqyHNzcIeaB2Fus0772HmUCICpfpRH3ApJzXx5TrkpxrWato"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-surface flex items-center justify-center text-[10px] font-bold">+4</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation Overlay (Visible on mobile) -->
+<div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 glass-panel px-6 py-4 rounded-full flex items-center gap-8 shadow-2xl z-50">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="material-symbols-outlined text-slate-400">add_circle</span>
+<span class="material-symbols-outlined text-slate-400">person</span>
+<span class="material-symbols-outlined text-slate-400">settings</span>
+</div>
+</body></html>

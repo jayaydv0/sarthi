@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Project {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String    @map("user_id") @db.Uuid
+  name       String
+  localPath  String    @map("local_path")
+  liveUrl    String?   @map("live_url")
+  envSecrets String?   @map("env_secrets")
+  notes      String?
+  createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  files ProjectFile[]
+
+  @@map("projects")
+}
+
+model ProjectFile {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  projectId   String    @map("project_id") @db.Uuid
+  path        String
+  content     String    @default("")
+  updatedAt   DateTime? @map("updated_at") @db.Timestamptz(6)
+  storagePath String?   @map("storage_path")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, path])
+  @@map("project_files")
+}
