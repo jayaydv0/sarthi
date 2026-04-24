@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up | ArchitectOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#081425",
+                        "outline": "#908fa0",
+                        "on-background": "#d8e3fb",
+                        "on-primary-fixed": "#07006c",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-container-highest": "#2a3548",
+                        "on-tertiary-fixed-variant": "#5a4300",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#1f2a3c",
+                        "primary-fixed": "#e1e0ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-tertiary-fixed": "#251a00",
+                        "on-tertiary-container": "#372700",
+                        "secondary-container": "#00b954",
+                        "on-primary": "#1000a9",
+                        "on-surface": "#d8e3fb",
+                        "tertiary-fixed": "#ffdf9a",
+                        "secondary-fixed": "#6bff8f",
+                        "surface": "#081425",
+                        "secondary-fixed-dim": "#4ae176",
+                        "primary": "#c0c1ff",
+                        "tertiary": "#f7be1d",
+                        "surface-container": "#152031",
+                        "surface-bright": "#2f3a4c",
+                        "on-surface-variant": "#c7c4d7",
+                        "inverse-surface": "#d8e3fb",
+                        "surface-tint": "#c0c1ff",
+                        "outline-variant": "#464554",
+                        "primary-container": "#8083ff",
+                        "surface-container-low": "#111c2d",
+                        "tertiary-fixed-dim": "#f7be1d",
+                        "inverse-on-surface": "#263143",
+                        "inverse-primary": "#494bd6",
+                        "on-primary-container": "#0d0096",
+                        "surface-container-lowest": "#040e1f",
+                        "on-tertiary": "#3f2e00",
+                        "surface-variant": "#2a3548",
+                        "secondary": "#4ae176",
+                        "tertiary-container": "#b68a00",
+                        "on-secondary": "#003915",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#004119",
+                        "surface-dim": "#081425",
+                        "on-secondary-fixed-variant": "#005321",
+                        "on-secondary-fixed": "#002109"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #081425;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(42, 53, 72, 0.4);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(225, 224, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+<!-- Background Decor -->
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/5 blur-[120px] rounded-full"></div>
+<!-- Main Signup Container -->
+<main class="w-full max-w-[480px] z-10">
+<!-- Brand Header (Using JSON Identity Reference) -->
+<div class="mb-10 text-center">
+<h1 class="text-3xl font-extrabold tracking-tighter bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] bg-clip-text text-transparent mb-2">
+                ArchitectOS
+            </h1>
+<p class="text-on-surface-variant font-medium tracking-tight">Deploy your vision with precision.</p>
+</div>
+<!-- Signup Card -->
+<div class="glass-panel rounded-xl p-10 shadow-[0_20px_40px_rgba(8,20,37,0.4)]">
+<h2 class="text-2xl font-semibold mb-8 tracking-tight text-white">Create your account</h2>
+<!-- OAuth Section -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<button class="flex items-center justify-center gap-2 bg-surface-container-lowest hover:bg-surface-container-low border border-outline-variant/15 py-3.5 rounded-full transition-all duration-200 active:scale-95">
+<img alt="Google Logo" class="w-5 h-5" data-alt="clean minimalist google logo icon in high resolution on transparent background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxryIuNd9T3V9zlF-QFv6A6kVAu0apgKilsNBjIxGlf82HD1irc6KUpURpPPNow18Q96taOkEz17peedInUMkF-o0_yDUHau163wfuvMFiKUDu7I5zZwdmkuCkoczd3bpA-lGeY2wU_NP1QbJDIA6I5okPRSckdRWTf16wZCL3gyw0LwlTl7IlykM_NWuvO14Q7ZPvIQIRps6V3SS-sQZtD2SwjbGfB4CF6BqYdgNb9Q5MNRMGPSZ3ciqqlV8WN9H0PY6pSpkgvsY"/>
+<span class="text-sm font-semibold tracking-wide">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 bg-surface-container-lowest hover:bg-surface-container-low border border-outline-variant/15 py-3.5 rounded-full transition-all duration-200 active:scale-95">
+<svg class="w-5 h-5 fill-white" viewbox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+<span class="text-sm font-semibold tracking-wide">GitHub</span>
+</button>
+</div>
+<div class="relative flex py-4 items-center mb-8">
+<div class="flex-grow border-t border-outline-variant/10"></div>
+<span class="flex-shrink mx-4 text-[10px] font-bold tracking-[0.2em] text-outline uppercase">Or register with email</span>
+<div class="flex-grow border-t border-outline-variant/10"></div>
+</div>
+<!-- Signup Form -->
+<form action="#" class="space-y-5">
+<div class="space-y-2">
+<label class="text-[11px] font-bold tracking-widest text-outline uppercase ml-1">Full Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50 text-xl">person</span>
+<input class="w-full bg-surface-container-lowest text-on-surface border-none rounded-DEFAULT py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/30 transition-all placeholder:text-outline/30" placeholder="John Doe" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold tracking-widest text-outline uppercase ml-1">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50 text-xl">alternate_email</span>
+<input class="w-full bg-surface-container-lowest text-on-surface border-none rounded-DEFAULT py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/30 transition-all placeholder:text-outline/30" placeholder="john@architectos.io" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] font-bold tracking-widest text-outline uppercase ml-1">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50 text-xl">lock</span>
+<input class="w-full bg-surface-container-lowest text-on-surface border-none rounded-DEFAULT py-4 pl-12 pr-12 focus:ring-2 focus:ring-primary/30 transition-all placeholder:text-outline/30" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline/50 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold text-lg rounded-xl shadow-[0_8px_24px_rgba(128,131,255,0.25)] hover:shadow-[0_12px_32px_rgba(128,131,255,0.4)] active:scale-[0.98] transition-all">
+                        Create Account
+                    </button>
+</div>
+</form>
+<p class="mt-8 text-center text-sm text-on-surface-variant font-medium">
+                Already have an account? 
+                <a class="text-primary hover:underline underline-offset-4 decoration-primary/30 font-bold transition-all ml-1" href="#">Sign in here</a>
+</p>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-10 flex flex-wrap justify-center gap-6 text-[10px] font-bold tracking-[0.1em] text-outline/40 uppercase">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Security</a>
+<span>© 2024 ArchitectOS</span>
+</footer>
+</main>
+<!-- Decoration: Floating Architectural Element -->
+<div class="hidden lg:block absolute right-[-5%] top-[15%] w-96 h-96 opacity-10 pointer-events-none">
+<div class="w-full h-full border-[20px] border-primary-fixed rounded-xl rotate-[35deg]"></div>
+</div>
+<div class="hidden lg:block absolute left-[-5%] bottom-[10%] w-64 h-64 opacity-5 pointer-events-none">
+<div class="w-full h-full border-[10px] border-secondary-fixed rounded-full"></div>
+</div>
+</body></html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ArchitectOS - Project Management &amp; Code Backup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#081425",
+                    "outline": "#908fa0",
+                    "on-background": "#d8e3fb",
+                    "on-primary-fixed": "#07006c",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "surface-container-highest": "#2a3548",
+                    "on-tertiary-fixed-variant": "#5a4300",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#1f2a3c",
+                    "primary-fixed": "#e1e0ff",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#c0c1ff",
+                    "on-tertiary-fixed": "#251a00",
+                    "on-tertiary-container": "#372700",
+                    "secondary-container": "#00b954",
+                    "on-primary": "#1000a9",
+                    "on-surface": "#d8e3fb",
+                    "tertiary-fixed": "#ffdf9a",
+                    "secondary-fixed": "#6bff8f",
+                    "surface": "#081425",
+                    "secondary-fixed-dim": "#4ae176",
+                    "primary": "#c0c1ff",
+                    "tertiary": "#f7be1d",
+                    "surface-container": "#152031",
+                    "surface-bright": "#2f3a4c",
+                    "on-surface-variant": "#c7c4d7",
+                    "inverse-surface": "#d8e3fb",
+                    "surface-tint": "#c0c1ff",
+                    "outline-variant": "#464554",
+                    "primary-container": "#8083ff",
+                    "surface-container-low": "#111c2d",
+                    "tertiary-fixed-dim": "#f7be1d",
+                    "inverse-on-surface": "#263143",
+                    "inverse-primary": "#494bd6",
+                    "on-primary-container": "#0d0096",
+                    "surface-container-lowest": "#040e1f",
+                    "on-tertiary": "#3f2e00",
+                    "surface-variant": "#2a3548",
+                    "secondary": "#4ae176",
+                    "tertiary-container": "#b68a00",
+                    "on-secondary": "#003915",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#004119",
+                    "surface-dim": "#081425",
+                    "on-secondary-fixed-variant": "#005321",
+                    "on-secondary-fixed": "#002109"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #081425;
+            color: #d8e3fb;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<!-- Top Navigation Bar -->
+<header class="bg-[#081425]/60 backdrop-blur-[24px] font-['Inter'] antialiased tracking-[-0.02em] docked full-width fixed top-0 z-50 border-t border-white/10 shadow-[0_20px_40px_rgba(8,20,37,0.4)] flex justify-between items-center w-full px-8 h-20">
+<div class="flex items-center gap-12">
+<div class="text-2xl font-bold tracking-tighter bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] bg-clip-text text-transparent">
+                ArchitectOS
+            </div>
+<nav class="hidden md:flex gap-8">
+<a class="text-[#c0c1ff] border-b-2 border-[#c0c1ff] pb-1 hover:text-white transition-colors duration-200" href="#">Home</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors duration-200" href="#">Features</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors duration-200" href="#">Workflow</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors duration-200" href="#">Pricing</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-white/5">
+<span class="material-symbols-outlined text-outline mr-2 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface" placeholder="Search architecture..." type="text"/>
+</div>
+<button class="text-slate-400 font-medium hover:text-white transition-colors duration-200 active:scale-95">Login</button>
+<button class="bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm hover:opacity-90 active:scale-95 transition-all">Get Started</button>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center overflow-hidden px-8">
+<div class="absolute inset-0 z-0">
+<div class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+<div class="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-white/10">
+<span class="flex h-2 w-2 rounded-full bg-secondary"></span>
+<span class="text-[0.6875rem] font-bold tracking-widest uppercase text-on-surface-variant">Version 2.0 Now Live</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
+                        Manage, Sync, and <br/>
+<span class="bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">Backup Your Projects</span> <br/>
+                        Effortlessly
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                        Your personal cloud for code. Auto-sync your local projects and access them anywhere with our low-latency global architecture.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-10 py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                            Get Started Free
+                        </button>
+<button class="bg-surface-variant/20 backdrop-blur-md border border-outline-variant/30 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-surface-variant/40 active:scale-95 transition-all">
+                            View Demo
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="bg-surface-container-low rounded-xl p-4 border border-white/10 shadow-2xl overflow-hidden aspect-square flex items-center justify-center">
+<img alt="Code interface" class="rounded-lg object-cover w-full h-full opacity-80 mix-blend-lighten" data-alt="Close-up of a high-end code editor interface with syntax highlighting in purple and blue tones, reflecting on a dark screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5AEllUygDvJMVoQybhh5uGCaAkcmfpM6dlMvKilJgoDc-Ru2cH8-ke7mvQVEkFkZrwrMwZeMkEfBX6ZPQ8DeouNABlq91zWjtIS-CWkC39cp4qI3rYYIPocCkwWwUqb8mrmlELHGRwBe02-nj8_3nl9Rgbj0JiVTHVv_GX0TqdKVTszcp64Yc7kBeBaESNdo8j26ZFeJ6c8GfsS3dn4MuNi79ngyHRO6IGa3OTgJdEAFyAGP7E75VxQnaKMmKvgJZrEj8Y2uxizQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-24 px-8 container mx-auto">
+<div class="mb-16">
+<span class="text-sm font-bold tracking-[0.2em] text-primary uppercase">Core Features</span>
+<h2 class="text-4xl font-bold mt-4">Built for Modern Workflows</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Large Feature -->
+<div class="md:col-span-8 bg-surface-container-high rounded-xl p-8 border border-white/5 flex flex-col justify-between overflow-hidden relative group">
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="sync">sync</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Auto Sync</h3>
+<p class="text-on-surface-variant max-w-md">Our proprietary daemon watches your file system and pushes changes instantly to your private cloud storage without manual git commands.</p>
+</div>
+<div class="mt-12 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<img alt="Sync visualization" class="rounded-t-lg opacity-40" data-alt="Abstract visualization of data streams flowing between nodes in a deep blue and violet dark space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr_UBwDmAY9AHnqNL2lJPyfjTP85r5EDe-W70dV8kt1d27dx_v-ACkkHATVRReRBlIUufeJZLlQFbUcksu9AcTT37aIf4gjN-YXntDEUaIMtV6qcBcmCViJ2s8rMgSLpOp6dk2nsY2Lpr8oxaEZAS3J6Ow2CDUyY7dp61tLH3evzd0uW-xIXs59g9ZkJNSwbtZv3Vm08mlu8efgWcGpv-O9GbSSW06-KT5HqntdKK1EKsXagHkIRA-_ad1a6XteKQVP6y1VnAYyEo"/>
+</div>
+</div>
+<!-- Secure Feature -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 border border-white/5 relative overflow-hidden group">
+<div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary" data-icon="security" data-weight="fill">security</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Secure Cloud Storage</h3>
+<p class="text-on-surface-variant mb-8">AES-256 encryption at rest and in transit. Your code is yours alone.</p>
+<div class="absolute bottom-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[8rem]" data-icon="lock">lock</span>
+</div>
+</div>
+<!-- Download Feature -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 border border-white/5 group">
+<div class="w-12 h-12 rounded-2xl bg-tertiary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary" data-icon="download">download</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Download Anytime</h3>
+<p class="text-on-surface-variant">Access specific commits or entire project snapshots from any device in seconds.</p>
+</div>
+<!-- Dashboard Feature -->
+<div class="md:col-span-8 bg-surface-container-highest rounded-xl p-8 border border-white/5 flex items-center gap-8 overflow-hidden">
+<div class="flex-1">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="dashboard">dashboard</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">Clean Dashboard</h3>
+<p class="text-on-surface-variant">A minimalist workspace designed to keep you focused on building, not managing files.</p>
+</div>
+<div class="hidden sm:block flex-1 rotate-3 translate-x-8">
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-white/10 shadow-2xl">
+<div class="flex gap-2 mb-4">
+<div class="w-3 h-3 rounded-full bg-error/40"></div>
+<div class="w-3 h-3 rounded-full bg-tertiary/40"></div>
+<div class="w-3 h-3 rounded-full bg-secondary/40"></div>
+</div>
+<div class="space-y-2">
+<div class="h-2 w-3/4 bg-surface-variant rounded"></div>
+<div class="h-2 w-1/2 bg-surface-variant rounded"></div>
+<div class="h-2 w-5/6 bg-surface-variant rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="py-24 bg-surface-container-lowest relative overflow-hidden">
+<div class="container mx-auto px-8 relative z-10">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-5xl font-bold mb-6">The 3-Step Architecture</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto">Simplify your development pipeline with our streamlined onboarding process.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="text-center space-y-6 relative group">
+<div class="text-[8rem] font-black text-white/5 absolute -top-12 left-1/2 -translate-x-1/2 select-none group-hover:text-primary/10 transition-colors">01</div>
+<div class="w-20 h-20 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center mx-auto relative z-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="link">link</span>
+</div>
+<h4 class="text-2xl font-bold relative z-10">Connect</h4>
+<p class="text-on-surface-variant relative z-10">Install the ArchitectOS CLI and link your local development directory with one command.</p>
+</div>
+<div class="text-center space-y-6 relative group">
+<div class="text-[8rem] font-black text-white/5 absolute -top-12 left-1/2 -translate-x-1/2 select-none group-hover:text-primary/10 transition-colors">02</div>
+<div class="w-20 h-20 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center mx-auto relative z-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<h4 class="text-2xl font-bold relative z-10">Sync</h4>
+<p class="text-on-surface-variant relative z-10">Your projects automatically mirror to our encrypted cloud servers whenever you hit save.</p>
+</div>
+<div class="text-center space-y-6 relative group">
+<div class="text-[8rem] font-black text-white/5 absolute -top-12 left-1/2 -translate-x-1/2 select-none group-hover:text-primary/10 transition-colors">03</div>
+<div class="w-20 h-20 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center mx-auto relative z-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h4 class="text-2xl font-bold relative z-10">Manage</h4>
+<p class="text-on-surface-variant relative z-10">Use our web interface to revert versions, share code, or deploy to production environments.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 px-8">
+<div class="container mx-auto bg-gradient-to-br from-surface-container-high to-surface-container-low rounded-xl p-12 md:p-20 text-center border border-white/10 relative overflow-hidden">
+<div class="absolute inset-0 opacity-10">
+<img alt="Abstract background" class="w-full h-full object-cover" data-alt="Digital representation of global data network with light lines connecting points on a dark blue background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCll8pgIk2QWvkoHQdK5WI3oc6LZAVp5l0anhqKg3Tj0UZwrllKl26reHQpPFOWLKKYa2LcPxF3oDpRJZ_u5k7FsG_K6cNjwW7Tyi8MyGfBb7OHbQKCVpbJ6ZXs1_1LfCV9DXtTppNwnMvTzsf6E0KqjASlvP17EopnHWseVS7cYStJImG8y2QR1VU50JnOIYY91IrHpN_ZpyCtc_huuP3DytAlQuCxVZ7KAd0DPx8lGa1hh6ad1bjh4G80d_viKaUzSZy_DThnBrE"/>
+</div>
+<div class="relative z-10 space-y-8">
+<h2 class="text-4xl md:text-6xl font-bold text-white tracking-tight">Ready to build better?</h2>
+<p class="text-on-surface-variant text-xl max-w-2xl mx-auto">Join 10,000+ developers who trust ArchitectOS with their most important assets.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-12 py-5 rounded-full font-bold text-lg hover:scale-105 active:scale-95 transition-all">
+                            Get Started Now
+                        </button>
+</div>
+<div class="text-on-surface-variant text-sm font-medium">Free forever plan available. No credit card required.</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest py-20 px-8 border-t border-white/5">
+<div class="container mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="space-y-6">
+<div class="text-2xl font-bold tracking-tighter bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] bg-clip-text text-transparent">
+                        ArchitectOS
+                    </div>
+<p class="text-sm text-slate-500 leading-relaxed">
+                        The ultimate studio for modern developers. Secure, fast, and beautifully designed for those who shape the digital world.
+                    </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-container-high border border-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/50 transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="public">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-high border border-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/50 transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-high border border-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/50 transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="code">code</span>
+</a>
+</div>
+</div>
+<div>
+<h5 class="font-bold text-white mb-6 uppercase tracking-wider text-xs">Product</h5>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Features</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Security</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">CLI Tool</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-white mb-6 uppercase tracking-wider text-xs">Company</h5>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">About</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Blog</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Careers</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-white mb-6 uppercase tracking-wider text-xs">Legal</h5>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 hover:text-white transition-colors text-sm" href="#">Cookie Settings</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-600 text-xs">© 2024 ArchitectOS. All rights reserved.</p>
+<div class="flex gap-8">
+<span class="flex items-center gap-2 text-xs text-secondary/70">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                        All Systems Operational
+                    </span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
