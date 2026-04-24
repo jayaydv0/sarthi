@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Learned User Preferences
 
 - Prefer minimal, functional MVP code: avoid overengineering, unnecessary abstractions, and extra files unless something is required to run (for example a small `package.json` for ESM and dependencies).
@@ -13,3 +14,10 @@
 - Supabase **`projects`** uses fields such as **`notes`** (and related schema from **`website/supabase-schema.sql`**); create-project flows may map description into **`notes`**.
 - **`website/.gitignore`** should use **`!.env.example`** alongside **`.env*`** so **`website/.env.example`** can be committed.
 - For Supabase setup aligned with the repo, run **`website/supabase-schema.sql`** then **`website/supabase-storage.sql`**; set **sync-engine** **`SYNC_USER_ID`** to your real **Supabase Auth** user UUID (replace the **`.env.example`** placeholder) so projects and Storage object prefixes match the account you use in the app.
+=======
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->
+>>>>>>> 115eb85c3a9d5c6ddf19947c4f67d1eeecc91918

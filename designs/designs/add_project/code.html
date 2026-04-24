@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ArchitectOS | Add Project</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#081425",
+                    "outline": "#908fa0",
+                    "on-background": "#d8e3fb",
+                    "on-primary-fixed": "#07006c",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "surface-container-highest": "#2a3548",
+                    "on-tertiary-fixed-variant": "#5a4300",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#1f2a3c",
+                    "primary-fixed": "#e1e0ff",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#c0c1ff",
+                    "on-tertiary-fixed": "#251a00",
+                    "on-tertiary-container": "#372700",
+                    "secondary-container": "#00b954",
+                    "on-primary": "#1000a9",
+                    "on-surface": "#d8e3fb",
+                    "tertiary-fixed": "#ffdf9a",
+                    "secondary-fixed": "#6bff8f",
+                    "surface": "#081425",
+                    "secondary-fixed-dim": "#4ae176",
+                    "primary": "#c0c1ff",
+                    "tertiary": "#f7be1d",
+                    "surface-container": "#152031",
+                    "surface-bright": "#2f3a4c",
+                    "on-surface-variant": "#c7c4d7",
+                    "inverse-surface": "#d8e3fb",
+                    "surface-tint": "#c0c1ff",
+                    "outline-variant": "#464554",
+                    "primary-container": "#8083ff",
+                    "surface-container-low": "#111c2d",
+                    "tertiary-fixed-dim": "#f7be1d",
+                    "inverse-on-surface": "#263143",
+                    "inverse-primary": "#494bd6",
+                    "on-primary-container": "#0d0096",
+                    "surface-container-lowest": "#040e1f",
+                    "on-tertiary": "#3f2e00",
+                    "surface-variant": "#2a3548",
+                    "secondary": "#4ae176",
+                    "tertiary-container": "#b68a00",
+                    "on-secondary": "#003915",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#004119",
+                    "surface-dim": "#081425",
+                    "on-secondary-fixed-variant": "#005321",
+                    "on-secondary-fixed": "#002109"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #081425; color: #d8e3fb; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(42, 53, 72, 0.4); backdrop-filter: blur(24px); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1f2a3c; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Execution from JSON) -->
+<nav class="fixed left-0 top-0 flex flex-col py-8 h-screen w-72 rounded-r-[3rem] overflow-hidden bg-[#111c2d] z-50">
+<div class="px-8 mb-12">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<div>
+<h1 class="text-xl font-black text-[#c0c1ff]">Dev Studio</h1>
+<p class="text-[0.6875rem] font-medium tracking-[0.05em] uppercase text-slate-500">Premium Tier</p>
+</div>
+</div>
+<div class="space-y-2">
+<!-- Overview -->
+<a class="flex items-center gap-3 text-slate-500 px-6 py-4 hover:bg-[#1f2a3c] hover:text-slate-200 transition-all duration-300 hover:translate-x-1 duration-200 text-sm font-medium tracking-wide uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<!-- Add Project (ACTIVE) -->
+<a class="flex items-center gap-3 bg-gradient-to-r from-[#c0c1ff]/10 to-transparent text-[#c0c1ff] px-6 py-4 border-r-4 border-[#c0c1ff] hover:translate-x-1 duration-200 text-sm font-medium tracking-wide uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span>Add Project</span>
+</a>
+<!-- Profile -->
+<a class="flex items-center gap-3 text-slate-500 px-6 py-4 hover:bg-[#1f2a3c] hover:text-slate-200 transition-all duration-300 hover:translate-x-1 duration-200 text-sm font-medium tracking-wide uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 text-slate-500 px-6 py-4 hover:bg-[#1f2a3c] hover:text-slate-200 transition-all duration-300 hover:translate-x-1 duration-200 text-sm font-medium tracking-wide uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</div>
+<div class="mt-auto px-8">
+<button class="w-full py-4 px-6 bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] text-on-primary-container font-bold rounded-full shadow-lg hover:scale-[1.02] active:scale-95 transition-transform text-sm uppercase tracking-wider">
+                Deploy New
+            </button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="ml-72 flex-1 p-12 bg-background relative overflow-hidden min-h-screen">
+<!-- Background Decorations (Subtle Tonal Shifts) -->
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[5%] w-[300px] h-[300px] bg-secondary/5 blur-[80px] rounded-full"></div>
+<!-- Editorial Header -->
+<header class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<p class="text-primary text-[0.75rem] font-bold tracking-[0.1em] uppercase mb-4">Workspace Initialization</p>
+<h2 class="text-[3.5rem] font-extrabold tracking-[-0.03em] leading-none mb-6">Start a New <br/><span class="text-primary-container">Architectural Journey</span></h2>
+<p class="text-on-surface-variant text-lg leading-relaxed font-light">Define the parameters for your next high-performance development environment. We'll handle the scaffolding and infrastructure orchestration.</p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-high p-6 rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<div>
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Active Tier</p>
+<p class="font-bold text-on-surface">Pro Cloud Infrastructure</p>
+</div>
+</div>
+</header>
+<!-- Main Form Section (Asymmetric Bento) -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left: Core Details -->
+<div class="col-span-12 lg:col-span-7 space-y-8">
+<div class="bg-surface-container-low p-10 rounded-xl">
+<h3 class="text-xl font-bold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">edit_square</span>
+                        Project Identity
+                    </h3>
+<div class="space-y-10">
+<!-- Project Name Input -->
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-[0.1em] text-slate-400 mb-4 group-focus-within:text-primary transition-colors">
+                                Project Name
+                            </label>
+<input class="w-full bg-surface-container-lowest border-none rounded-DEFAULT px-6 py-4 text-lg text-white placeholder:text-slate-600 focus:ring-2 focus:ring-primary/30 transition-all outline-none" placeholder="e.g. ArchitectOS Engine" type="text"/>
+</div>
+<!-- Description Textarea -->
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-[0.1em] text-slate-400 mb-4 group-focus-within:text-primary transition-colors">
+                                Project Narrative &amp; Scope
+                            </label>
+<textarea class="w-full bg-surface-container-lowest border-none rounded-DEFAULT px-6 py-4 text-base text-white placeholder:text-slate-600 focus:ring-2 focus:ring-primary/30 transition-all outline-none resize-none" placeholder="Briefly describe the architectural intent and primary tech stack..." rows="4"></textarea>
+</div>
+</div>
+</div>
+<!-- Connect Local Folder Placeholder -->
+<div class="bg-surface-container-low p-10 rounded-xl relative overflow-hidden group cursor-pointer border border-transparent hover:border-primary/20 transition-all">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">folder_zip</span>
+                                Local Environment
+                            </h3>
+<span class="px-3 py-1 bg-secondary-container/10 text-secondary text-[0.6rem] font-black uppercase rounded-full">Recommended</span>
+</div>
+<div class="flex flex-col items-center justify-center border-2 border-dashed border-outline-variant/20 rounded-lg p-12 transition-colors group-hover:border-primary/40">
+<div class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<p class="text-lg font-medium text-white mb-2">Connect local folder</p>
+<p class="text-sm text-slate-400 text-center max-w-xs">Sync your local workspace directly to the cloud architect engine for real-time deployment previews.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Config & Visualization -->
+<div class="col-span-12 lg:col-span-5 space-y-8">
+<!-- Preview Card -->
+<div class="bg-surface-container-high rounded-xl overflow-hidden aspect-[4/3] relative flex items-center justify-center p-8 group">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-[2s]" data-alt="Abstract futuristic 3D wireframe of a building in a deep blue space with glowing neon lines and digital particles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2WAO78ussIXbKwVXWnHue5yPkkqkGog22Kia2kklZ3UWapCYBcIjp3i8-6rJEcF3UJL-7PaP8rsxIR1I7-TjKIdrEgucYKj3FTmpwz0_5VYZ5wE1qrwbKB6v2_kvULnggIBiKEjzWtwBc0hwfjJX9V61OJt6B9P5OAmMK3vSswa7Agvl2_ibGMIoaDDbQXYjvc2mkEpz6IK5bFG1GzAJTDnMWuRXTQfDxiFuLFjE2x_QAjytTc3Otuev5C0NgtWjO1fhKmhP1t_I"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<div class="relative z-10 text-center">
+<div class="inline-flex items-center gap-2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full mb-4 border border-white/10">
+<div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+<span class="text-[0.65rem] font-bold uppercase tracking-widest text-secondary">Real-time Visualization</span>
+</div>
+<h4 class="text-2xl font-black text-white">Instance Preview</h4>
+<p class="text-slate-300 text-sm mt-2">Visualizing your metadata architecture...</p>
+</div>
+</div>
+<!-- Settings Bento Item -->
+<div class="bg-surface-container-low p-8 rounded-xl">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 mb-8">Deployment Strategy</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-highest rounded-lg border border-outline-variant/10 cursor-pointer hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">cloud_done</span>
+<div>
+<p class="font-bold text-sm">Serverless Edge</p>
+<p class="text-xs text-slate-500">Auto-scaling latency optimization</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest/50 rounded-lg border border-outline-variant/10 cursor-pointer opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400">dns</span>
+<div>
+<p class="font-bold text-sm">Dedicated Node</p>
+<p class="text-xs text-slate-500">Persistent compute resources</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+<!-- Create Project CTA -->
+<div class="pt-4">
+<button class="w-full group relative overflow-hidden py-8 bg-gradient-to-br from-[#c0c1ff] to-[#8083ff] rounded-xl flex items-center justify-center gap-4 shadow-[0_20px_40px_rgba(192,193,255,0.2)] hover:translate-y-[-4px] active:translate-y-[0px] transition-all">
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 skew-y-6 origin-bottom"></div>
+<span class="relative z-10 text-xl font-black text-on-primary-container tracking-tight">Create Project</span>
+<span class="relative z-10 material-symbols-outlined text-on-primary-container text-2xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center text-slate-500 text-xs mt-6">By creating this project, you agree to our <span class="text-primary hover:underline cursor-pointer">Computational Standards</span>.</p>
+</div>
+</div>
+</div>
+<!-- Footer / Technical Specs (Asymmetric metadata) -->
+<footer class="mt-24 border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-start gap-12 text-slate-500 pb-12">
+<div class="flex gap-16">
+<div>
+<p class="text-[0.65rem] font-black uppercase tracking-[0.2em] mb-4">Core Engine</p>
+<p class="text-sm font-medium">v4.12.0-stable</p>
+</div>
+<div>
+<p class="text-[0.65rem] font-black uppercase tracking-[0.2em] mb-4">Node Affinity</p>
+<p class="text-sm font-medium">Global Distributed</p>
+</div>
+<div>
+<p class="text-[0.65rem] font-black uppercase tracking-[0.2em] mb-4">Uptime SLA</p>
+<p class="text-sm font-medium text-secondary">99.999%</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-xs">System Status: <span class="text-secondary font-bold">Optimal</span></span>
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+</div>
+</footer>
+</main>
+</body></html>
