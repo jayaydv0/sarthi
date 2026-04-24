@@ -3,6 +3,7 @@ import { supabase } from "./supabase.js";
 
 /** @type {{ id: string, root: string }[]} */
 let cache = [];
+let lastProjectCount = -1;
 
 export function getWatchedProjects() {
   return cache;
@@ -40,12 +41,15 @@ export async function loadProjectsFromSupabase() {
     return { id: row.id, root };
   });
 
-  if (cache.length === 0) {
-    console.warn(
-      "[engine] No projects returned for this user. Create a project in the web app and set its local folder path.",
-    );
-  } else {
-    console.log(`[engine] loaded ${cache.length} project(s) from Supabase`);
+  if (cache.length !== lastProjectCount) {
+    if (cache.length === 0) {
+      console.warn(
+        "[engine] No projects returned for this user. Create a project in the web app and set its local folder path.",
+      );
+    } else {
+      console.log(`[engine] loaded ${cache.length} project(s) from Supabase`);
+    }
+    lastProjectCount = cache.length;
   }
 
   return cache;

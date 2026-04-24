@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Geist_Mono, Inter } from "next/font/google";
+import { Toaster } from "sonner";
+import Script from "next/script";
 import "./globals.css";
 import "./architect-ui.css";
 
@@ -30,10 +32,29 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-full min-w-0 flex-col overflow-x-clip bg-surface font-sans text-base leading-normal text-on-surface">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`
+            (function() {
+              try {
+                var theme = localStorage.getItem('ao-theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+                if (theme === 'light') {
+                  document.documentElement.classList.add('light');
+                  document.documentElement.classList.remove('dark');
+                } else {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.classList.remove('light');
+                }
+              } catch (e) {}
+            })();
+          `}
+        </Script>
         {children}
+        <Toaster theme="dark" position="bottom-right" />
       </body>
     </html>
   );

@@ -35,7 +35,7 @@ export default async function DashboardLayout({
       </div>
       <Link href="/dashboard/new" className="ao-fab" aria-label="New project">
         <Rocket
-          className="size-7 text-[#0d0096]"
+          className="size-7 text-on-primary"
           strokeWidth={2}
           fill="currentColor"
           aria-hidden

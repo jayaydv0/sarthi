@@ -51,7 +51,23 @@ export async function uploadAvatar(formData: FormData) {
 
   const { error: metaError } = await supabase.auth.updateUser({
     data: {
-      avatar_url: pub.publicUrl,
+      avatar_url: `${pub.publicUrl}?t=${Date.now()}`,
+    },
+  });
+
+  if (metaError) {
+    return { error: metaError.message };
+  }
+
+  revalidatePath("/dashboard/profile");
+  return { ok: true as const };
+}
+
+export async function updateAvatarUrl(url: string) {
+  const supabase = await createServerSupabase();
+  const { error: metaError } = await supabase.auth.updateUser({
+    data: {
+      avatar_url: url,
     },
   });
 

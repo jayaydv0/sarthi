@@ -225,7 +225,7 @@ export default function SignupPage() {
           </p>
         </div>
 
-        <footer className="mt-10 flex flex-wrap justify-center gap-6 text-[10px] font-bold uppercase tracking-[0.1em] text-outline/40">
+        <footer className="mt-10 flex flex-wrap justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-outline/40">
           <span className="transition-colors hover:text-primary">Privacy Policy</span>
           <span className="transition-colors hover:text-primary">Terms of Service</span>
           <span className="transition-colors hover:text-primary">Security</span>

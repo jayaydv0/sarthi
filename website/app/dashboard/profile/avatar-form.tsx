@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { uploadAvatar } from "./actions";
 
 export function AvatarForm() {
+  const router = useRouter();
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -14,7 +16,8 @@ export function AvatarForm() {
         e.preventDefault();
         setPending(true);
         setMessage(null);
-        const formData = new FormData(e.currentTarget);
+        const formElement = e.currentTarget;
+        const formData = new FormData(formElement);
         const result = await uploadAvatar(formData);
         setPending(false);
         if ("error" in result && result.error) {
@@ -22,7 +25,8 @@ export function AvatarForm() {
           return;
         }
         setMessage("Avatar updated.");
-        e.currentTarget.reset();
+        formElement.reset();
+        router.refresh();
       }}
     >
       <label className="text-xs font-bold uppercase tracking-wider text-outline">

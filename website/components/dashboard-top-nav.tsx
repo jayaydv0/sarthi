@@ -4,11 +4,12 @@ import { Bell, History } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/brand-logo";
+import { toast } from "sonner";
 
 function navLinkClass(active: boolean) {
   return active
-    ? "border-b-2 border-[#c0c1ff] pb-1 text-sm font-semibold text-[#c0c1ff]"
-    : "text-sm font-medium text-[#64748b] transition-colors hover:text-white";
+    ? "border-b-2 border-primary pb-1 text-sm font-semibold text-primary"
+    : "text-sm font-medium text-on-surface-variant transition-colors hover:text-on-surface";
 }
 
 export function DashboardTopNav({
@@ -42,22 +43,24 @@ export function DashboardTopNav({
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
         <button
           type="button"
-          className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl text-[#94a3b8] hover:bg-[rgba(255,255,255,0.06)] hover:text-white"
+          onClick={() => toast.info("You have no new notifications.")}
+          className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
           aria-label="Notifications"
         >
           <Bell className="size-5" strokeWidth={2} aria-hidden />
-          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#4ae176] ring-2 ring-[rgba(8,20,37,0.95)]" />
+          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-secondary ring-2 ring-surface" />
         </button>
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-[#94a3b8] hover:bg-[rgba(255,255,255,0.06)] hover:text-white"
+          onClick={() => toast.info("No recent sync activity detected.")}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
           aria-label="History"
         >
           <History className="size-5" strokeWidth={2} aria-hidden />
         </button>
         <Link
           href="/dashboard/profile"
-          className="h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-[rgba(192,193,255,0.25)] p-0.5 outline-none ring-offset-2 ring-offset-[#081425] transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[#c0c1ff]"
+          className="h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-primary/20 p-0.5 outline-none ring-offset-2 ring-offset-surface transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-primary"
           aria-label="Profile"
         >
           {avatarUrl ? (
@@ -68,7 +71,7 @@ export function DashboardTopNav({
               className="h-full w-full rounded-full object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center rounded-full bg-[#1c2739] text-sm font-bold text-[#c0c1ff]">
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-surface-container-high text-sm font-bold text-primary">
               {(emailHint ?? "?").slice(0, 1).toUpperCase()}
             </div>
           )}

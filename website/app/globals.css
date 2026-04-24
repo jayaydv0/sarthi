@@ -59,8 +59,65 @@
   --shadow-ambient: 0 20px 40px rgba(8, 20, 37, 0.4);
 }
 
+[data-theme='light'], .light {
+  color-scheme: light;
+  
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-surface: #f8fafc;
+  --color-on-surface: #0f172a;
+  --color-surface-container: #ffffff;
+  --color-surface-container-low: #f1f5f9;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #e2e8f0;
+  --color-surface-container-highest: #cbd5e1;
+  --color-on-surface-variant: #64748b;
+  --color-outline: #cbd5e1;
+  --color-outline-variant: #e2e8f0;
+  --color-primary: #4f46e5;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #e0e7ff;
+  --color-on-primary-container: #3730a3;
+  --color-secondary: #10b981;
+  
+  /* ArchitectOS Overrides */
+  --ao-bg: #f8fafc;
+  --ao-bg-elev: #f1f5f9;
+  --ao-panel: #ffffff;
+  --ao-panel-2: #f8fafc;
+  --ao-sidebar: #ffffff;
+  --ao-line: rgba(0, 0, 0, 0.08);
+  --ao-line-soft: rgba(0, 0, 0, 0.04);
+  --ao-text: #0f172a;
+  --ao-muted: #64748b;
+  --ao-violet: #4f46e5;
+  --ao-violet-2: #6366f1;
+  --ao-on-violet: #ffffff;
+  --ao-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ao-shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+[data-theme='light'] .ao-panel {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='light'] .ao-sidebar {
+  background: #ffffff;
+  border-right-color: #e2e8f0;
+}
+
+[data-theme='light'] .ao-dash-header {
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom-color: #e2e8f0;
+}
+
 html {
-  color-scheme: dark;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
   overflow-x: clip;
   width: 100%;
   max-width: 100%;
@@ -106,14 +163,15 @@ body {
 }
 
 .glass-header {
-  background: rgba(8, 20, 37, 0.6);
+  background: var(--color-surface-container);
   backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--color-outline-variant);
 }
 
 .glass-panel {
-  background: rgba(42, 53, 72, 0.4);
+  background: var(--color-surface-container-low);
   backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(225, 224, 255, 0.1);
+  border: 1px solid var(--color-outline-variant);
 }
 
 .auth-input:focus {

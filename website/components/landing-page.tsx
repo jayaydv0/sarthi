@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { toast } from "sonner";
 import type { LucideIcon } from "lucide-react";
 import {
   CloudUpload,
@@ -10,7 +13,10 @@ import {
   Search,
   Shield,
 } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { BrandLogo } from "@/components/brand-logo";
+import { useRef, useEffect, useState } from "react";
+import { Code, Box, Globe, Cpu } from "lucide-react";
 
 const HERO_IMG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuB5AEllUygDvJMVoQybhh5uGCaAkcmfpM6dlMvKilJgoDc-Ru2cH8-ke7mvQVEkFkZrwrMwZeMkEfBX6ZPQ8DeouNABlq91zWjtIS-CWkC39cp4qI3rYYIPocCkwWwUqb8mrmlELHGRwBe02-nj8_3nl9Rgbj0JiVTHVv_GX0TqdKVTszcp64Yc7kBeBaESNdo8j26ZFeJ6c8GfsS3dn4MuNi79ngyHRO6IGa3OTgJdEAFyAGP7E75VxQnaKMmKvgJZrEj8Y2uxizQ";
@@ -47,7 +53,63 @@ const workflowSteps: {
   },
 ];
 
-export function LandingPage() {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.21, 0.47, 0.32, 0.98],
+    },
+  },
+};
+
+export function LandingPage({ hasUser = false }: { hasUser?: boolean }) {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 50]);
+
+  // Smooth mouse movement for spotlight
+  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 30 });
+  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 30 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const rect = heroRef.current?.getBoundingClientRect();
+      if (rect) {
+        mouseX.set(clientX - rect.left);
+        mouseY.set(clientY - rect.top);
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+  // Parallax values for hero content
+  const rotateX = useTransform(smoothY, [0, 800], [2, -2]);
+  const rotateY = useTransform(smoothX, [0, 1200], [-2, 2]);
+
   return (
     <div className="ao-marketing min-h-screen">
       <header className="ao-mkt-nav">
@@ -82,51 +144,154 @@ export function LandingPage() {
               placeholder="Search…"
               type="search"
               aria-label="Search"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  toast.info("Global Search is currently indexing. Coming in v2.1!");
+                }
+              }}
             />
           </div>
-          <Link href="/login" className="ao-mkt-navlink hidden sm:inline">
-            Login
-          </Link>
-          <Link href="/signup" className="ao-btn-primary px-5 py-2.5 text-sm">
-            Get Started
-          </Link>
+          {hasUser ? (
+            <Link href="/dashboard" className="ao-btn-primary px-5 py-2.5 text-sm">
+              Go to Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link href="/login" className="ao-mkt-navlink hidden sm:inline">
+                Login
+              </Link>
+              <Link href="/signup" className="ao-btn-primary px-5 py-2.5 text-sm">
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
       </header>
 
       <main>
-        <section className="ao-mkt-hero">
+        <section ref={heroRef} className="ao-mkt-hero overflow-hidden">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full bg-[#8083ff]/15 blur-[100px]" />
-            <div className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-[#4ae176]/08 blur-[90px]" />
+            {/* Spotlight Effect */}
+            <motion.div
+              style={{
+                left: smoothX,
+                top: smoothY,
+              }}
+              className="absolute -ml-64 -mt-64 h-[512px] w-[512px] rounded-full bg-gradient-to-r from-[#8083ff]/10 to-transparent blur-[120px]"
+            />
+            
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, 10, 0],
+                opacity: [0.15, 0.25, 0.15],
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute -right-32 -top-32 h-[520px] w-[520px] rounded-full bg-[#8083ff]/20 blur-[120px]"
+            />
+            <motion.div
+              animate={{
+                scale: [1, 1.1, 1],
+                x: [0, 20, 0],
+                opacity: [0.08, 0.15, 0.08],
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 2 }}
+              className="absolute -bottom-40 -left-24 h-[480px] w-[480px] rounded-full bg-[#4ae176]/10 blur-[100px]"
+            />
+
+            {/* Floating 3D Elements */}
+            <motion.div
+              animate={{ y: [0, -20, 0], rotate: [0, 15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute left-[10%] top-[20%] text-[#8083ff]/30"
+            >
+              <Code size={48} strokeWidth={1} />
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, 20, 0], rotate: [0, -15, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute right-[15%] top-[15%] text-[#4ae176]/20"
+            >
+              <Box size={56} strokeWidth={1} />
+            </motion.div>
+            <motion.div
+              animate={{ x: [0, 15, 0], y: [0, 15, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute bottom-[20%] left-[15%] text-[#c0c1ff]/20"
+            >
+              <Globe size={40} strokeWidth={1} />
+            </motion.div>
+            <motion.div
+              animate={{ scale: [1, 1.1, 1], rotate: [0, 360, 0] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute bottom-[15%] right-[20%] text-[#8083ff]/15"
+            >
+              <Cpu size={64} strokeWidth={1} />
+            </motion.div>
           </div>
-          <div className="ao-mkt-container relative z-[1] grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="min-w-0 space-y-6 lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.1)] bg-[#1c2739] px-3 py-1.5">
+          <motion.div 
+            style={{ opacity, scale, y, rotateX, rotateY }}
+            className="ao-mkt-container relative z-[1] grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
+          >
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="min-w-0 space-y-6 lg:col-span-7"
+            >
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.1)] bg-[#1c2739] px-3 py-1.5">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-[#4ae176]" />
                 <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8b9cb8]">
                   Version 2.0 Now Live
                 </span>
-              </div>
-              <h1 className="ao-mkt-h1">
+              </motion.div>
+              <motion.h1 variants={itemVariants} className="ao-mkt-h1">
                 Manage, sync, and{" "}
-                <span className="ao-mkt-gradient">back up your projects</span>{" "}
+                <motion.span 
+                  animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  className="ao-mkt-gradient inline-block bg-[length:200%_auto]"
+                >
+                  back up your projects
+                </motion.span>{" "}
                 effortlessly.
-              </h1>
-              <p className="ao-mkt-lead">
+              </motion.h1>
+              <motion.p variants={itemVariants} className="ao-mkt-lead">
                 Your personal cloud for code. Auto-sync local projects and open
                 them anywhere—without fighting the UI.
-              </p>
-              <div className="ao-mkt-btn-row">
-                <Link href="/signup" className="ao-mkt-btn-primary-lg">
-                  Get started free
-                </Link>
+              </motion.p>
+              <motion.div variants={itemVariants} className="ao-mkt-btn-row">
+                {hasUser ? (
+                  <Link href="/dashboard" className="ao-mkt-btn-primary-lg">
+                    Go to Dashboard
+                  </Link>
+                ) : (
+                  <Link href="/signup" className="ao-mkt-btn-primary-lg">
+                    Get started free
+                  </Link>
+                )}
                 <Link href="#features" className="ao-mkt-btn-secondary-lg">
                   View features
                 </Link>
-              </div>
-            </div>
-            <div className="min-w-0 lg:col-span-5">
-              <div className="ao-mkt-media">
+              </motion.div>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 40, rotate: 2 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="min-w-0 lg:col-span-5"
+            >
+              <motion.div 
+                whileHover={{ 
+                  rotateX: -10, 
+                  rotateY: 10,
+                  scale: 1.02,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="ao-mkt-media"
+                style={{ perspective: 1000 }}
+              >
                 <div className="ao-mkt-media-inner">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -136,19 +301,37 @@ export function LandingPage() {
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#081425] via-transparent to-transparent" />
                 </div>
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </section>
 
         <section id="features" className="ao-mkt-section">
           <div className="ao-mkt-container">
-            <p className="ao-kicker">Core features</p>
-            <h2 className="ao-title-page mb-10 max-w-xl">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="ao-kicker"
+            >
+              Core features
+            </motion.p>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="ao-title-page mb-10 max-w-xl"
+            >
               Built for modern workflows
-            </h2>
+            </motion.h2>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-6">
-              <article className="ao-mkt-card md:col-span-8">
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="ao-mkt-card md:col-span-8"
+              >
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(192,193,255,0.12)]">
                   <RefreshCw
                     className="size-6 text-[#c0c1ff]"
@@ -169,8 +352,14 @@ export function LandingPage() {
                     src={SYNC_FEATURE_IMG}
                   />
                 </div>
-              </article>
-              <article className="ao-mkt-card md:col-span-4">
+              </motion.article>
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="ao-mkt-card md:col-span-4"
+              >
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(74,225,118,0.1)]">
                   <Shield
                     className="size-6 text-[#4ae176]"
@@ -180,8 +369,14 @@ export function LandingPage() {
                 </div>
                 <h3>Secure storage</h3>
                 <p>Encryption in transit and at rest. Your code stays yours.</p>
-              </article>
-              <article className="ao-mkt-card md:col-span-4">
+              </motion.article>
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="ao-mkt-card md:col-span-4"
+              >
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(247,190,29,0.1)]">
                   <Download
                     className="size-6 text-[#f7be1d]"
@@ -191,8 +386,14 @@ export function LandingPage() {
                 </div>
                 <h3>Download anytime</h3>
                 <p>Pull snapshots or paths from any device in seconds.</p>
-              </article>
-              <article className="ao-mkt-card flex flex-col gap-6 md:col-span-8 md:flex-row md:items-center">
+              </motion.article>
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="ao-mkt-card flex flex-col gap-6 md:col-span-8 md:flex-row md:items-center"
+              >
                 <div className="min-w-0 flex-1">
                   <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(128,131,255,0.15)]">
                     <LayoutDashboard
@@ -206,7 +407,10 @@ export function LandingPage() {
                     A focused workspace: projects first, noise never.
                   </p>
                 </div>
-                <div className="hidden w-full max-w-[220px] shrink-0 rotate-2 sm:block">
+                <motion.div 
+                  whileHover={{ rotate: 5, scale: 1.05 }}
+                  className="hidden w-full max-w-[220px] shrink-0 rotate-2 sm:block"
+                >
                   <div className="rounded-xl border border-[rgba(255,255,255,0.1)] bg-[#040e1f] p-4 shadow-xl">
                     <div className="mb-3 flex gap-2">
                       <span className="h-2.5 w-2.5 rounded-full bg-[#ffb4ab]/50" />
@@ -219,8 +423,8 @@ export function LandingPage() {
                       <div className="h-2 w-full max-w-full rounded bg-[#2a3548]" />
                     </div>
                   </div>
-                </div>
-              </article>
+                </motion.div>
+              </motion.article>
             </div>
           </div>
         </section>
@@ -234,8 +438,15 @@ export function LandingPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
-              {workflowSteps.map(({ n, Icon, title, body }) => (
-                <div key={n} className="relative text-center">
+              {workflowSteps.map(({ n, Icon, title, body }, idx) => (
+                <motion.div 
+                  key={n}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.15 }}
+                  className="relative text-center"
+                >
                   <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 text-7xl font-black text-[rgba(255,255,255,0.04)] md:text-8xl">
                     {n}
                   </span>
@@ -250,7 +461,7 @@ export function LandingPage() {
                   <p className="text-[0.9375rem] leading-relaxed text-[#8b9cb8]">
                     {body}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -334,10 +545,10 @@ export function LandingPage() {
               </h5>
               <ul className="space-y-3 text-sm text-[#8b9cb8]">
                 <li>
-                  <span className="cursor-default">Privacy</span>
+                  <button type="button" onClick={() => toast.info("Our legal team is drafting the Privacy Policy as we speak!")} className="hover:text-white transition-colors cursor-pointer">Privacy</button>
                 </li>
                 <li>
-                  <span className="cursor-default">Terms</span>
+                  <button type="button" onClick={() => toast.info("Terms of Service are planned for the full v2.0 release.")} className="hover:text-white transition-colors cursor-pointer">Terms</button>
                 </li>
               </ul>
             </div>

@@ -1,4 +1,4 @@
-import { updateProjectSettings } from "@/app/project/actions";
+import { deleteProject, updateProjectSettings } from "@/app/project/actions";
 import { prisma } from "@/lib/prisma";
 import { createServerSupabase } from "@/lib/supabase-server";
 import { Save } from "lucide-react";
@@ -7,10 +7,13 @@ import { notFound } from "next/navigation";
 
 export default async function ProjectEditPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams?: { error?: string; message?: string };
 }) {
   const { id } = await params;
+  const { error: errorCode, message } = searchParams ?? {};
   const supabase = await createServerSupabase();
   const {
     data: { user },
@@ -36,6 +39,14 @@ export default async function ProjectEditPage({
   }
 
   const action = updateProjectSettings.bind(null, id);
+  const deleteAction = deleteProject.bind(null, id);
+  const errorMessage =
+    message ||
+    (errorCode === "validation"
+      ? "Please fix the highlighted fields and try again."
+      : errorCode === "delete"
+      ? "Could not delete the project. Please try again later."
+      : null);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8 md:px-0">
@@ -66,6 +77,12 @@ export default async function ProjectEditPage({
       </div>
 
       <form action={action} className="mt-8 flex flex-col gap-6">
+        {errorMessage ? (
+          <div className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+            {errorMessage}
+          </div>
+        ) : null}
+
         <label className="flex flex-col gap-2">
           <span className="text-[0.6875rem] font-bold uppercase tracking-[0.05em] text-outline">
             Name
@@ -133,6 +150,23 @@ export default async function ProjectEditPage({
           Save
         </button>
       </form>
+
+      <div className="mt-10 rounded-2xl border border-red-500/20 bg-red-500/10 p-6">
+        <p className="text-sm font-bold uppercase tracking-[0.15em] text-red-200">
+          Danger Zone
+        </p>
+        <p className="mt-3 text-sm leading-6 text-red-100">
+          Permanently delete this project and all related information. This cannot be undone.
+        </p>
+        <form action={deleteAction} className="mt-6">
+          <button
+            type="submit"
+            className="rounded-full bg-red-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-red-500"
+          >
+            Delete Project
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -11,6 +11,9 @@ import {
   Pencil,
 } from "lucide-react";
 import { createServerSupabase } from "@/lib/supabase-server";
+import { InteractiveToastButton } from "@/components/interactive-toast-button";
+import { ProfileImageInteraction } from "./profile-image-interaction";
+import { ConnectedAccounts } from "./connected-accounts";
 
 export default async function ProfilePage() {
   const supabase = await createServerSupabase();
@@ -40,43 +43,20 @@ export default async function ProfilePage() {
           </p>
         </div>
         <div className="flex gap-4">
-          <button
-            type="button"
-            className="flex items-center gap-2 rounded-full bg-surface-container-high px-6 py-3 text-on-surface transition-colors hover:bg-surface-bright"
-          >
+          <InteractiveToastButton
+              message="Profile editing capabilities are coming in the next release."
+              className="flex items-center gap-2 rounded-full bg-surface-container-high px-6 py-3 text-on-surface transition-colors hover:bg-surface-bright"
+            >
             <Pencil className="size-4" strokeWidth={2} aria-hidden />
             Edit Profile
-          </button>
+          </InteractiveToastButton>
           <LogoutButton />
         </div>
       </header>
 
       <div className="grid grid-cols-12 gap-8">
         <section className="col-span-12 flex flex-col items-center gap-10 rounded-xl border border-white/5 bg-surface-container-low p-8 lg:col-span-8 md:flex-row">
-          <div className="relative group">
-            <div className="h-48 w-48 overflow-hidden rounded-xl shadow-ambient transition-transform duration-300 group-hover:scale-105">
-              {avatarUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={avatarUrl}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center bg-surface-container-highest text-4xl font-bold text-primary">
-                  {name.slice(0, 1).toUpperCase()}
-                </div>
-              )}
-            </div>
-            <div className="absolute -bottom-4 -right-4 flex h-12 w-12 items-center justify-center rounded-full border-4 border-surface-container-low bg-secondary shadow-lg">
-              <BadgeCheck
-                className="size-4 text-on-secondary"
-                strokeWidth={2}
-                fill="currentColor"
-                aria-hidden
-              />
-            </div>
-          </div>
+          <ProfileImageInteraction avatarUrl={avatarUrl} name={name} />
           <div className="flex-1">
             <div className="mb-6">
               <span className="mb-2 block text-[0.6875rem] font-bold uppercase tracking-widest text-primary">
@@ -142,35 +122,7 @@ export default async function ProfilePage() {
           </div>
         </div>
 
-        <section className="col-span-12 rounded-xl border border-white/5 bg-surface-container-low p-8 lg:col-span-6">
-          <div className="mb-8 flex items-center justify-between">
-            <h4 className="text-xl font-bold">Connected Accounts</h4>
-            <button
-              type="button"
-              className="text-sm font-bold text-primary hover:underline"
-            >
-              Link New
-            </button>
-          </div>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between rounded-lg bg-surface-container-highest p-5 transition-all group hover:bg-surface-bright">
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded bg-[#ea4335]/10">
-                  <svg className="h-5 w-5" fill="#ea4335" viewBox="0 0 24 24">
-                    <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.909 3.292-2.09 4.479-1.217 1.218-2.811 2.019-5.75 2.019-4.894 0-8.805-4.027-8.805-9.182s3.911-9.182 8.805-9.182c2.81 0 4.88 1.109 6.27 2.441l2.31-2.31c-2.09-2-5.02-3.41-8.58-3.41-6.62 0-12 5.38-12 12s5.38 12 12 12c3.58 0 6.27-1.17 8.37-3.35 2.16-2.16 2.84-5.21 2.84-7.67 0-.77-.07-1.49-.19-2.14z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-bold">Google</p>
-                  <p className="text-xs text-outline">{email}</p>
-                </div>
-              </div>
-              <span className="rounded bg-secondary/10 px-2 py-1 text-[0.6875rem] font-bold uppercase text-secondary">
-                Active
-              </span>
-            </div>
-          </div>
-        </section>
+        <ConnectedAccounts userIdentities={user?.identities ?? []} userEmail={email} />
 
         <section className="col-span-12 rounded-xl border border-white/5 bg-surface-container-low p-8 lg:col-span-6">
           <h4 className="mb-8 text-xl font-bold">Security &amp; Privacy</h4>
@@ -192,13 +144,13 @@ export default async function ProfilePage() {
                   Secure your account with an extra layer of protection using your
                   mobile device.
                 </p>
-                <button
-                  type="button"
+                <InteractiveToastButton
+                  message="2FA settings interface will be available shortly."
                   className="mt-2 flex items-center gap-1 text-sm font-bold text-secondary"
                 >
                   Learn more
                   <ChevronRight className="size-4" strokeWidth={2} aria-hidden />
-                </button>
+                </InteractiveToastButton>
               </div>
             </div>
             <div className="flex gap-4">

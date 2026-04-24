@@ -15,15 +15,16 @@ import {
 export default async function NewProjectPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; message?: string }>;
 }) {
-  const { error: errorCode } = await searchParams;
+  const { error: errorCode, message } = await searchParams;
   const errorMessage =
-    errorCode === "validation"
+    message ??
+    (errorCode === "validation"
       ? "Enter a project name and local path."
       : errorCode === "save"
         ? "Could not save the project. Check that the Supabase projects table and RLS policies match website/supabase-schema.sql."
-        : null;
+        : null);
 
   return (
     <div className="relative">
@@ -32,7 +33,7 @@ export default async function NewProjectPage({
 
       <header className="relative mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="max-w-2xl">
-          <p className="mb-4 text-[0.75rem] font-bold uppercase tracking-[0.1em] text-primary">
+          <p className="mb-4 text-[0.75rem] font-bold uppercase tracking-widest text-primary">
             Workspace Initialization
           </p>
           <h2 className="mb-6 text-[2.5rem] font-extrabold leading-none tracking-[-0.03em] md:text-[3.5rem]">
@@ -63,7 +64,7 @@ export default async function NewProjectPage({
 
       {errorMessage ? (
         <div
-          className="relative mb-8 flex gap-3 rounded-xl border border-[#ffb4ab]/30 bg-[rgba(255,180,171,0.08)] px-5 py-4 text-sm text-[#ffb4ab]"
+          className="relative mb-8 flex gap-3 rounded-xl border border-error/30 bg-[rgba(255,180,171,0.08)] px-5 py-4 text-sm text-error"
           role="alert"
         >
           <AlertCircle className="mt-0.5 size-5 shrink-0" strokeWidth={2} aria-hidden />
@@ -82,7 +83,7 @@ export default async function NewProjectPage({
               <div className="group">
                 <label
                   htmlFor="name"
-                  className="mb-4 block text-xs font-bold uppercase tracking-[0.1em] text-slate-400 transition-colors group-focus-within:text-primary"
+                  className="mb-4 block text-xs font-bold uppercase tracking-widest text-slate-400 transition-colors group-focus-within:text-primary"
                 >
                   Project Name
                 </label>
@@ -97,7 +98,7 @@ export default async function NewProjectPage({
               <div className="group">
                 <label
                   htmlFor="description"
-                  className="mb-4 block text-xs font-bold uppercase tracking-[0.1em] text-slate-400 transition-colors group-focus-within:text-primary"
+                  className="mb-4 block text-xs font-bold uppercase tracking-widest text-slate-400 transition-colors group-focus-within:text-primary"
                 >
                   Project Narrative &amp; Scope
                 </label>
@@ -112,7 +113,7 @@ export default async function NewProjectPage({
               <div className="group">
                 <label
                   htmlFor="local_path"
-                  className="mb-4 block text-xs font-bold uppercase tracking-[0.1em] text-slate-400 transition-colors group-focus-within:text-primary"
+                  className="mb-4 block text-xs font-bold uppercase tracking-widest text-slate-400 transition-colors group-focus-within:text-primary"
                 >
                   Local Path
                 </label>
@@ -223,7 +224,7 @@ export default async function NewProjectPage({
           <div className="pt-4">
             <button
               type="submit"
-              className="group relative flex w-full items-center justify-center gap-4 overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary-container py-8 shadow-[0_20px_40px_rgba(192,193,255,0.2)] transition-all hover:translate-y-[-4px] active:translate-y-0"
+              className="group relative flex w-full items-center justify-center gap-4 overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary-container py-8 shadow-[0_20px_40px_rgba(192,193,255,0.2)] transition-all hover:-translate-y-1 active:translate-y-0"
             >
               <span className="relative z-10 text-xl font-black tracking-tight text-on-primary-container">
                 Create Project

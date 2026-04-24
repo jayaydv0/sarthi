@@ -9,6 +9,8 @@ import {
   WifiOff,
 } from "lucide-react";
 import { createServerSupabase } from "@/lib/supabase-server";
+import { InteractiveToastButton } from "@/components/interactive-toast-button";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export default async function SettingsPage() {
   const supabase = await createServerSupabase();
@@ -47,39 +49,7 @@ export default async function SettingsPage() {
 
       <div className="grid grid-cols-12 items-start gap-8">
         <div className="col-span-12 space-y-8 lg:col-span-7">
-          <section className="rounded-xl bg-surface-container-low p-10">
-            <div className="mb-8 flex items-center justify-between">
-              <div>
-                <h3 className="mb-1 text-2xl font-semibold">Appearance</h3>
-                <p className="text-sm text-on-surface-variant">
-                  Customize the visual interface
-                </p>
-              </div>
-              <Palette
-                className="text-3xl text-primary"
-                strokeWidth={2}
-                aria-hidden
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-primary bg-primary/5 p-6">
-                <div className="flex h-24 w-full flex-col gap-2 rounded-lg border border-outline-variant/20 bg-surface p-2">
-                  <div className="h-2 w-1/2 rounded-full bg-surface-container-highest" />
-                  <div className="flex-1 rounded bg-surface-container-low" />
-                </div>
-                <span className="text-sm font-bold">Deep Sea (Dark)</span>
-              </div>
-              <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-outline-variant/20 p-6 opacity-60">
-                <div className="flex h-24 w-full flex-col gap-2 rounded-lg border border-slate-200 bg-slate-50 p-2">
-                  <div className="h-2 w-1/2 rounded-full bg-slate-200" />
-                  <div className="flex-1 rounded bg-white shadow-sm" />
-                </div>
-                <span className="text-sm font-bold text-on-surface-variant">
-                  Crystal (Light)
-                </span>
-              </div>
-            </div>
-          </section>
+          <ThemeSwitcher />
 
           <section className="rounded-xl bg-surface-container-high p-10">
             <div className="mb-10 flex items-center justify-between">
@@ -178,12 +148,12 @@ export default async function SettingsPage() {
                 <Legend dot="bg-surface-container-high" label="Free (30%)" />
               </div>
             </div>
-            <button
-              type="button"
+            <InteractiveToastButton
+              message="System cache and unused references have been cleared! (45MB freed)"
               className="w-full rounded-lg border border-outline-variant/30 py-3 text-sm font-semibold transition-colors hover:bg-surface-container-high"
             >
               Clean Up Workspace
-            </button>
+            </InteractiveToastButton>
           </section>
 
           <section className="rounded-xl border border-error/20 bg-error-container/5 p-10">
@@ -203,13 +173,13 @@ export default async function SettingsPage() {
               history, synced configurations, and premium credits will be
               permanently removed.
             </p>
-            <button
-              type="button"
+            <InteractiveToastButton
+              message="For security, please contact support to initiate complete account deletion."
               className="group flex w-full items-center justify-center gap-3 rounded-xl border border-error/40 py-4 font-bold text-error transition-all duration-300 hover:bg-error hover:text-on-error"
             >
               <Trash2 className="size-5" strokeWidth={2} aria-hidden />
               Delete Account Permanently
-            </button>
+            </InteractiveToastButton>
           </section>
 
           <div className="relative overflow-hidden rounded-xl border border-white/5 bg-gradient-to-br from-surface-container-high to-surface p-8">
@@ -241,15 +211,15 @@ export default async function SettingsPage() {
             © 2026 ARCHITECTOS
           </span>
           <nav className="flex gap-6">
-            <span className="cursor-pointer text-xs text-on-surface-variant hover:text-primary">
+            <InteractiveToastButton as="span" message="Loading Privacy Policy..." className="cursor-pointer text-xs text-on-surface-variant hover:text-primary">
               Privacy
-            </span>
-            <span className="cursor-pointer text-xs text-on-surface-variant hover:text-primary">
+            </InteractiveToastButton>
+            <InteractiveToastButton as="span" message="Loading Terms of Service..." className="cursor-pointer text-xs text-on-surface-variant hover:text-primary">
               Terms
-            </span>
-            <span className="cursor-pointer text-xs text-on-surface-variant hover:text-primary">
+            </InteractiveToastButton>
+            <InteractiveToastButton as="span" message="Security whitepapers are forwarded to your email." className="cursor-pointer text-xs text-on-surface-variant hover:text-primary">
               Security
-            </span>
+            </InteractiveToastButton>
           </nav>
         </div>
         <div className="flex items-center gap-2 rounded-full bg-secondary/5 px-4 py-2 text-xs text-secondary">
